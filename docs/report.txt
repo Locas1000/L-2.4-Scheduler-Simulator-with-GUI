@@ -1,0 +1,53 @@
+# Scheduler Performance Report
+
+## 1. Process Set (Workload 1)
+
+* **Process 1:** Arrival Time: 0, Burst Time: 5, Priority: 1
+* **Process 2:** Arrival Time: 1, Burst Time: 3, Priority: 2
+* **Process 3:** Arrival Time: 2, Burst Time: 8, Priority: 1
+
+## 2. Algorithm Comparison
+
+**FIFO**
+Average Turnaround Time: 8.67
+Average Waiting Time: 3.33
+Average Response Time: 3.33
+
+**SJF (Shortest Job First)**
+Average Turnaround Time: 8.67
+Average Waiting Time: 3.33
+Average Response Time: 3.33
+
+**STCF (Shortest Time to Completion First)**
+Average Turnaround Time: 8.33
+Average Waiting Time: 3.00
+Average Response Time: 2.00
+
+**Round Robin (Quantum=3)**
+Average Turnaround Time: 10.00
+Average Waiting Time: 4.67
+Average Response Time: 2.33
+
+**MLFQ (Multi-Level Feedback Queue)**
+Average Turnaround Time: 10.33
+Average Waiting Time: 5.00
+Average Response Time: 2.33
+
+*(Note: Lower numbers are better for all time metrics)*
+
+## 3. Performance Analysis
+
+**Best Performer: STCF**
+The Shortest Time to Completion First (STCF) algorithm achieved the best scores across all categories (Avg TAT: 8.33, Avg WT: 3.00). The reason for this is that STCF is preemptive. When Process 2 arrived at Time=1 with a burst of 3, STCF recognized it was shorter than Process 1's remaining time (4) and immediately switched contexts. This allowed the short job to finish early, significantly reducing the average turnaround time.
+
+**FIFO vs. SJF**
+In this specific workload, FIFO and SJF performed identically. This occurred because Process 1 arrived first and was long enough that by the time it finished, all other processes had arrived. Since the remaining queue order (P2 then P3) matched both the arrival order and the shortest-job order, the execution schedule was the same.
+
+**Round Robin & MLFQ**
+These algorithms prioritized fairness and response time over raw turnaround speed. While their Turnaround Time was higher (10.00+), their Response Time (2.33) was much better than FIFO (3.33), making them superior for interactive environments where user responsiveness matters more than total completion speed.
+
+## 4. Recommendations
+
+**Interactive Systems:** Use MLFQ or Round Robin. The low response time ensures users don't feel "lag" when new tasks start.
+
+**Batch Processing:** Use STCF. It provides the most efficient throughput and lowest waiting times for the system overall.

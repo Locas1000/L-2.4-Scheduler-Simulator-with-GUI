@@ -1,0 +1,27 @@
+Ignore the object files directory
+
+obj/
+*.o
+
+Ignore the compiled executables
+
+scheduler
+scheduler_gui
+
+--- OS Generated Files ---
+
+.DS_Store
+Thumbs.db
+
+--- Editor Configs ---
+
+.vscode/
+*.swp
+*~
+
+--- Submission Archives ---
+
+Don't track the zip file you create for submission
+
+*.zip
+*.tar.gz
